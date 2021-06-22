@@ -15,12 +15,15 @@ public class IntGroupList implements IntGroup {
                 index++;
             }
         }
+        return list;
     }
 
     @Override
     public int getIntCount() {
         int count = 0;
-        for (int i = 0; i < value.length; i++) {count += value[i].getIntCount();}
+        for (int i = 0; i < value.length; i++) {
+            count += value[i].getIntCount();
+        }
         return count;
     }
 }

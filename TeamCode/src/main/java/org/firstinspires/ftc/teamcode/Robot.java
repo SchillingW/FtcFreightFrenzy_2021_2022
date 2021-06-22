@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-// base robot object
 public class Robot {
 
     public DcMotor[] dcMotors;
@@ -16,8 +15,14 @@ public class Robot {
     public String[] crServoNames;
 
     public Robot(HardwareMap map) {
-        for (int i = 0; i < dcMotors.length; i++) {dcMotors[i] = map.get(DcMotor.class, dcMotorNames[i]);}
-        for (int i = 0; i < servos.length; i++) {servos[i] = map.get(Servo.class, servoNames[i]);}
-        for (int i = 0; i < crServos.length; i++) {crServos[i] = map.get(CRServo.class, crServoNames[i]);}
+        for (int i = 0; i < dcMotors.length; i++) {
+            dcMotors[i] = map.get(DcMotor.class, dcMotorNames[i]);
+        }
+        for (int i = 0; i < servos.length; i++) {
+            servos[i] = map.get(Servo.class, servoNames[i]);
+        }
+        for (int i = 0; i < crServos.length; i++) {
+            crServos[i] = map.get(CRServo.class, crServoNames[i]);
+        }
     }
 }
