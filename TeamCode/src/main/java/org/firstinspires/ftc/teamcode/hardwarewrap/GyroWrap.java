@@ -46,8 +46,9 @@ public class GyroWrap {
 
     // get current gyro angle around active axis
     public double getAngle() {
-        Orientation orient = sensor.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.RADIANS);
-        return new double[]{orient.firstAngle, orient.secondAngle, orient.thirdAngle}[axis] * (flip ? -1 : 1);
+        AxesOrder order = new AxesOrder[]{AxesOrder.XYZ, AxesOrder.YZX, AxesOrder.ZXY}[axis];
+        Orientation orient = sensor.getAngularOrientation(AxesReference.INTRINSIC, order, AngleUnit.RADIANS);
+        return orient.firstAngle * (flip ? -1 : 1);
     }
 
     // convert radian angle measurement to rotations

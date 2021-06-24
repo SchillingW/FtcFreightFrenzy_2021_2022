@@ -18,7 +18,7 @@ public class PushBot {
 
     // gyro sensor properties
     public String gyroName = "gyro";
-    public int gyroAxis = 0;
+    public int gyroAxis = 2;
     public boolean gyroFlip = false;
 
     // init, get drive train
