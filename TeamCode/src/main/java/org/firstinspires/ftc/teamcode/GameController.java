@@ -35,19 +35,20 @@ public class GameController {
 
     // update input data
     public void update() {
+
         // backup last frame data
         boolInputsLast = boolInputs;
 
         for (int i = 0; i < pad.length; i++) {
 
             // stickLX
-            doubleInputs[i][0] = (double) pad[i].left_stick_x;
+            doubleInputs[i][0] = pad[i].left_stick_x;
             // stickLY
-            doubleInputs[i][1] = (double) pad[i].left_stick_y;
+            doubleInputs[i][1] = -pad[i].left_stick_y;
             // stickRX
-            doubleInputs[i][2] = (double) pad[i].right_stick_x;
+            doubleInputs[i][2] = pad[i].right_stick_x;
             // stickRY
-            doubleInputs[i][3] = (double) pad[i].right_stick_y;
+            doubleInputs[i][3] = -pad[i].right_stick_y;
             // buttonA
             boolInputs[i][0] = pad[i].a;
             // buttonB

@@ -22,12 +22,12 @@ public class MechDriveTrain {
     // run at constant power
     public void run(double x, double y, double rot) {
         // rf
-        motors[0].run((- x + y) * linearSpeed + rot * turnSpeed);
+        motors[0].run((+ x - y) * linearSpeed + rot * turnSpeed);
         // rb
-        motors[1].run((+ x + y) * linearSpeed + rot * turnSpeed);
+        motors[1].run((- x - y) * linearSpeed + rot * turnSpeed);
         // lf
-        motors[2].run((- x - y) * linearSpeed + rot * turnSpeed);
+        motors[2].run((+ x + y) * linearSpeed + rot * turnSpeed);
         // lb
-        motors[3].run((+ x - y) * linearSpeed + rot * turnSpeed);
+        motors[3].run((- x + y) * linearSpeed + rot * turnSpeed);
     }
 }
