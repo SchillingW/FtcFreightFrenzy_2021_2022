@@ -18,11 +18,11 @@ public class GyroWrap {
     public String name;
 
     // data parameters
-    public int axis;
+    public double startAngle;
     public boolean flip;
 
     // init, get gyro reference and set parameters
-    public GyroWrap(LinearOpMode op, HardwareMap map, String name, int axis, boolean flip) {
+    public GyroWrap(LinearOpMode op, HardwareMap map, String name) {
 
         // set parameters, measure in radians
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();
@@ -34,21 +34,19 @@ public class GyroWrap {
         // get sensor reference
         sensor = map.get(BNO055IMU.class, name);
         this.name = name;
-        this.axis = axis;
-        this.flip = flip;
 
         // initialize sensor
         sensor.initialize(params);
 
         // calibrate sensor
         while (!sensor.isGyroCalibrated() && (op == null || op.opModeIsActive())) {}
+        startAngle = getAngle();
     }
 
     // get current gyro angle around active axis
     public double getAngle() {
-        AxesOrder order = new AxesOrder[]{AxesOrder.XYZ, AxesOrder.YZX, AxesOrder.ZXY}[axis];
-        Orientation orient = sensor.getAngularOrientation(AxesReference.INTRINSIC, order, AngleUnit.RADIANS);
-        return orient.firstAngle * (flip ? -1 : 1);
+        Orientation orient = sensor.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS);
+        return orient.firstAngle - startAngle;
     }
 
     // convert radian angle measurement to rotations

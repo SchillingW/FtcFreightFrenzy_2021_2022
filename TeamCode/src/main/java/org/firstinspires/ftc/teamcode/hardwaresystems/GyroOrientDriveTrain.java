@@ -29,6 +29,7 @@ public class GyroOrientDriveTrain {
         double newRad = oldRad - angle;
         double newX = GyroWrap.rad2vectX(newRad, hype);
         double newY = GyroWrap.rad2vectY(newRad, hype);
+        tele.addData("StartAngle", gyro.startAngle);
         tele.addData("X", x);
         tele.addData("Y", y);
         tele.addData("Hype", hype);
@@ -37,6 +38,7 @@ public class GyroOrientDriveTrain {
         tele.addData("NewRad", newRad);
         tele.addData("NewX", newX);
         tele.addData("NewY", newY);
+        tele.update();
         driveTrain.run(newX, newY, rot);
     }
 }
