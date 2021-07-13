@@ -28,7 +28,6 @@ public class DcMotorWrap {
         motor.setPower(speed * this.speed);
     }
 
-
     // reset motor mode to Run With Encoder
     public void resetMode() {
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
