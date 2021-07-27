@@ -31,6 +31,6 @@ public class PushBotTele extends OpMode {
         pad.update();
 
         // set drive train power with controller x, y, and rotational input
-        bot.driveTrain.run(pad.doubleInputs[0][pad.stickLX], pad.doubleInputs[0][pad.stickLY], pad.doubleInputs[0][pad.stickRX], telemetry);
+        bot.driveTrain.run(pad.doubleInputs[0][pad.stickLX], pad.doubleInputs[0][pad.stickLY], pad.doubleInputs[0][pad.stickRX]);
     }
 }

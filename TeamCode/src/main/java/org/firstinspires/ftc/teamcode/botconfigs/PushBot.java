@@ -20,8 +20,8 @@ public class PushBot {
     // init, get drive train
     public PushBot(LinearOpMode op, HardwareMap map) {
         DcMotorWrap[] motors = new DcMotorWrap[4];
-        for (int i = 0; i < motors.length; i++) {motors[i] = new DcMotorWrap(map, driveTrainNames[i], 1);}
-        MechDriveTrain mechTrain = new MechDriveTrain(motors, driveLinearSpeed, driveTurnSpeed);
+        for (int i = 0; i < motors.length; i++) {motors[i] = new DcMotorWrap(map, driveTrainNames[i], 3, 1, 1, 1680);}
+        MechDriveTrain mechTrain = new MechDriveTrain(motors, driveLinearSpeed, driveTurnSpeed, 20);
         GyroWrap gyro = new GyroWrap(op, map, gyroName);
         driveTrain = new GyroOrientDriveTrain(mechTrain, gyro);
     }
