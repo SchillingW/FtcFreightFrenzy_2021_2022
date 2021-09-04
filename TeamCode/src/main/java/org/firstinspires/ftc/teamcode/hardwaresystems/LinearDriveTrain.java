@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.hardwarewrap.DcMotorWrap;
 // two wheel linear drive train device
 public class LinearDriveTrain {
 
-    // list of motors, {rf, rb, lf, lb}
+    // list of motors, {left, right}
     public DcMotorWrap[] motors;
 
     // base drive speed
