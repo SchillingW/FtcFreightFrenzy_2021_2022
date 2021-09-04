@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.hardwaresystems;
 
 import android.util.Pair;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.hardwarewrap.GyroWrap;
 
 // qyro-oriented mecanum drive train device
