@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.hardwaresystems;
 
 import org.firstinspires.ftc.teamcode.hardwarewrap.DcMotorWrap;
 
-// quad mecanum drive train device
+// two wheel linear drive train device
 public class LinearDriveTrain {
 
     // list of motors, {rf, rb, lf, lb}
@@ -12,30 +12,27 @@ public class LinearDriveTrain {
     public double linearSpeed;
     public double turnSpeed;
 
-    // distance between diagonal wheels
+    // distance between opposing
     public double inchesPerRotation;
 
     // init, get motor references and speed
-    public LinearDriveTrain(DcMotorWrap[] motors, double linearSpeed, double turnSpeed, double diagonalDistance) {
+    public LinearDriveTrain(DcMotorWrap[] motors, double linearSpeed, double turnSpeed, double opposingDistance) {
         this.motors = motors;
         this.linearSpeed = linearSpeed;
         this.turnSpeed = turnSpeed;
-        this.inchesPerRotation = diagonalDistance * Math.PI;
+        this.inchesPerRotation = opposingDistance * Math.PI;
     }
 
     // run at constant power
-    public void run(double x, double y, double rot) {
-        double[] speeds = calculateSpeeds(x, y, rot);
-        for (int i = 0; i < motors.length; i++) {
-            motors[i].run(speeds[i]);
-        }
+    public void run(double l, double r) {
+        motors[0].run(l);
+        motors[1].run(r);
     }
 
     // begin moving drive motors with encoders
-    public void startMoveEncoders(double x, double y, double rot, double speed) {
-        double[] distances = calculateSpeeds(x, y, rot * inchesPerRotation);
+    public void startMoveEncoders(double dist, double speed, boolean isStraight) {
         for (int i = 0; i < motors.length; i++) {
-            motors[i].startMoveEncoders(distances[i], speed);
+            motors[i].startMoveEncoders(dist * (isStraight ? 1 : inchesPerRotation * (i == 0 ? -1 : 1)), speed);
         }
     }
 
@@ -56,24 +53,10 @@ public class LinearDriveTrain {
     }
 
     // drive using encoders
-    public void moveEncoders(double x, double y, double rot, double speed) {
-        startMoveEncoders(x, y, rot, speed);
+    public void moveEncoders(double dist, double speed, boolean isStraight) {
+        startMoveEncoders(dist, speed, isStraight);
         while (isBusy()) {
             loopMoveEncoders();
         }
-    }
-
-    // get wheel speeds for dimensional speeds
-    public double[] calculateSpeeds(double x, double y, double rot) {
-        return new double[] {
-                // rf
-                (+ x - y) * linearSpeed + rot * turnSpeed,
-                // rb
-                (- x - y) * linearSpeed + rot * turnSpeed,
-                // lf
-                (+ x + y) * linearSpeed + rot * turnSpeed,
-                // lb
-                (- x + y) * linearSpeed + rot * turnSpeed
-        };
     }
 }
