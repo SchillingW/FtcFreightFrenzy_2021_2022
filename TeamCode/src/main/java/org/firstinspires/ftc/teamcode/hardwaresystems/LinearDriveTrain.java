@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.hardwaresystems;
-
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.hardwarewrap.DcMotorWrap;
 
 // two wheel linear drive train device
 public class LinearDriveTrain {
+
+    // telemtry device for debugging
+    public Telemetry tele;
 
     // list of motors, {left, right}
     public DcMotorWrap[] motors;
@@ -16,7 +19,8 @@ public class LinearDriveTrain {
     public double inchesPerRotation;
 
     // init, get motor references and speed
-    public LinearDriveTrain(DcMotorWrap[] motors, double linearSpeed, double turnSpeed, double opposingDistance) {
+    public LinearDriveTrain(Telemetry tele, DcMotorWrap[] motors, double linearSpeed, double turnSpeed, double opposingDistance) {
+        this.tele = tele;
         this.motors = motors;
         this.linearSpeed = linearSpeed;
         this.turnSpeed = turnSpeed;
@@ -25,14 +29,14 @@ public class LinearDriveTrain {
 
     // run at constant power
     public void run(double l, double r) {
-        motors[0].run(l);
+        motors[0].run(-l);
         motors[1].run(r);
     }
 
     // begin moving drive motors with encoders
     public void startMoveEncoders(double dist, double speed, boolean isStraight) {
         for (int i = 0; i < motors.length; i++) {
-            motors[i].startMoveEncoders(dist * (isStraight ? 1 : inchesPerRotation * (i == 0 ? -1 : 1)), speed);
+            motors[i].startMoveEncoders(dist * (isStraight ? (i == 0 ? -1 : 1) : -inchesPerRotation), speed * (isStraight ? linearSpeed : turnSpeed));
         }
     }
 

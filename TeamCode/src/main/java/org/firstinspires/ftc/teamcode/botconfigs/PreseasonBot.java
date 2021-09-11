@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.botconfigs;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.hardwaresystems.LinearDriveTrain;
 import org.firstinspires.ftc.teamcode.hardwarewrap.DcMotorWrap;
 
@@ -15,9 +15,9 @@ public class PreseasonBot {
     public double driveTurnSpeed = 1;
 
     // init, get drive train
-    public PreseasonBot(HardwareMap map) {
-        DcMotorWrap driveL = new DcMotorWrap(map, driveNameL, 3, 1, 1, 1680);
-        DcMotorWrap driveR = new DcMotorWrap(map, driveNameR, 3, 1, 1, 1680);
-        driveTrain = new LinearDriveTrain(new DcMotorWrap[]{driveL, driveR}, driveLinearSpeed, driveTurnSpeed, 8);
+    public PreseasonBot(Telemetry tele, HardwareMap map) {
+        DcMotorWrap driveL = new DcMotorWrap(tele, map, driveNameL, 3.5, 1, 1, 288);
+        DcMotorWrap driveR = new DcMotorWrap(tele, map, driveNameR, 3.5, 1, 1, 288);
+        driveTrain = new LinearDriveTrain(tele, new DcMotorWrap[]{driveL, driveR}, driveLinearSpeed, driveTurnSpeed, 8);
     }
 }

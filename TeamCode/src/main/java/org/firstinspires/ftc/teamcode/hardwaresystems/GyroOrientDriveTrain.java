@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode.hardwaresystems;
 
 import android.util.Pair;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.hardwarewrap.GyroWrap;
 
 // qyro-oriented mecanum drive train device
 public class GyroOrientDriveTrain {
+
+    // telemtry device for debugging
+    public Telemetry tele;
 
     // drive train reference
     public MechDriveTrain driveTrain;
@@ -14,6 +18,7 @@ public class GyroOrientDriveTrain {
 
     // init, get drive train and gyro
     public GyroOrientDriveTrain(MechDriveTrain driveTrain, GyroWrap gyro) {
+        this.tele = driveTrain.tele;
         this.driveTrain = driveTrain;
         this.gyro = gyro;
     }

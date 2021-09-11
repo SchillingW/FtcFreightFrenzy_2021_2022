@@ -2,9 +2,13 @@ package org.firstinspires.ftc.teamcode.hardwarewrap;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 // wrapper class for a DcMotor device
 public class DcMotorWrap {
+
+    // telemetry device for debugging
+    public Telemetry tele;
 
     // motor reference
     public DcMotor motor;
@@ -22,7 +26,9 @@ public class DcMotorWrap {
     public boolean isBusy;
 
     // init, get motor from HardwareMap
-    public DcMotorWrap(HardwareMap map, String name, double wheelDiameter, double gearRatio, double speed, double tpr) {
+    public DcMotorWrap(Telemetry tele, HardwareMap map, String name, double wheelDiameter, double gearRatio, double speed, double tpr) {
+
+        this.tele = tele;
 
         motor = map.get(DcMotor.class, name);
         this.name = name;
@@ -35,6 +41,7 @@ public class DcMotorWrap {
 
     // run at constant power
     public void run(double speed) {
+        tele.addData("run motor " + name, speed * this.speed);
         motor.setPower(speed * this.speed);
     }
 

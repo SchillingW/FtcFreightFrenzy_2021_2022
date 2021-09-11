@@ -2,9 +2,13 @@ package org.firstinspires.ftc.teamcode.hardwarewrap;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 // base wrapper class for Servo device
 public class ServoWrap {
+
+    // telemtry device for debugging
+    public Telemetry tele;
 
     // servo reference
     public Servo servo;
@@ -17,7 +21,10 @@ public class ServoWrap {
     public double maxLimit;
 
     // init, get servo from HardwareMap
-    public ServoWrap(HardwareMap map, String name, double minLimit, double maxLimit) {
+    public ServoWrap(Telemetry tele, HardwareMap map, String name, double minLimit, double maxLimit) {
+
+        this.tele = tele;
+
         servo = map.get(Servo.class, name);
         this.name = name;
         this.maxLimit = maxLimit;

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.hardwarewrap;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -10,6 +11,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 // wrapper class for a Gyro sensor device
 public class GyroWrap {
+
+    // telemtry device for debugging
+    public Telemetry tele;
 
     // sensor reference
     public BNO055IMU sensor;
@@ -23,6 +27,9 @@ public class GyroWrap {
 
     // init, get gyro reference and set parameters
     public GyroWrap(LinearOpMode op, HardwareMap map, String name) {
+
+        // get telemetry device from opMode
+        tele = op.telemetry;
 
         // set parameters, measure in radians
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();

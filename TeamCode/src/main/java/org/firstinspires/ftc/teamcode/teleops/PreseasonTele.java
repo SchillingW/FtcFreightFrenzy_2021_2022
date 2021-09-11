@@ -19,7 +19,7 @@ public class PreseasonTele extends OpMode {
     // init, get robot and controller
     @Override
     public void init() {
-        bot = new PreseasonBot(hardwareMap);
+        bot = new PreseasonBot(telemetry, hardwareMap);
         pad = new GameController(new Gamepad[]{gamepad1, gamepad2});
     }
 
@@ -30,7 +30,14 @@ public class PreseasonTele extends OpMode {
         // update game controller input
         pad.update();
 
+        // output input telemetry
+        telemetry.addData("left input", pad.doubleInputs[0][pad.stickLY]);
+        telemetry.addData("right input", pad.doubleInputs[0][pad.stickRY]);
+
         // set drive train power with controller x, y, and rotational input
         bot.driveTrain.run(pad.doubleInputs[0][pad.stickLY], pad.doubleInputs[0][pad.stickRY]);
+
+        // push telemetry debugging
+        telemetry.update();
     }
 }

@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.hardwaresystems;
-
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.hardwarewrap.DcMotorWrap;
 
 // quad mecanum drive train device
 public class MechDriveTrain {
+
+    // telemtry device for debugging
+    public Telemetry tele;
 
     // list of motors, {rf, rb, lf, lb}
     public DcMotorWrap[] motors;
@@ -16,7 +19,8 @@ public class MechDriveTrain {
     public double inchesPerRotation;
 
     // init, get motor references and speed
-    public MechDriveTrain(DcMotorWrap[] motors, double linearSpeed, double turnSpeed, double diagonalDistance) {
+    public MechDriveTrain(Telemetry tele, DcMotorWrap[] motors, double linearSpeed, double turnSpeed, double diagonalDistance) {
+        this.tele = tele;
         this.motors = motors;
         this.linearSpeed = linearSpeed;
         this.turnSpeed = turnSpeed;
