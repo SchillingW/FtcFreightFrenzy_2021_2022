@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.hardwarewrap.GyroWrap;
 // qyro-oriented mecanum drive train device
 public class GyroOrientDriveTrain {
 
-    // telemtry device for debugging
+    // telemetry device for debugging
     public Telemetry tele;
 
     // drive train reference
