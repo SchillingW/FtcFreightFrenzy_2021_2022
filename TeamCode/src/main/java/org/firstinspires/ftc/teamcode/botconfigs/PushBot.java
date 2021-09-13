@@ -22,7 +22,7 @@ public class PushBot {
         DcMotorWrap[] motors = new DcMotorWrap[4];
         for (int i = 0; i < motors.length; i++) {motors[i] = new DcMotorWrap(op.telemetry, map, driveTrainNames[i], 3, 1, 1, 1680);}
         MechDriveTrain mechTrain = new MechDriveTrain(op.telemetry, motors, driveLinearSpeed, driveTurnSpeed, 20);
-        GyroWrap gyro = new GyroWrap(op, map, gyroName);
+        GyroWrap gyro = new GyroWrap(op, map, gyroName, 0, false);
         driveTrain = new GyroOrientDriveTrain(mechTrain, gyro);
     }
 }

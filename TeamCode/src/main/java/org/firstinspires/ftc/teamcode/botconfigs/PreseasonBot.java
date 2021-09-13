@@ -41,9 +41,10 @@ public class PreseasonBot {
         arm = new ClawedHinge(tele, hinge, claw);
 
         // init gyro
-        gyro = new GyroWrap(op, map, gyroName);
+        gyro = new GyroWrap(op, map, gyroName, 0, false);
     }
 
+    // correct angle using gyro sensor to avoid drift
     public void normalizeGyro(double target, double speed) {
         driveTrain.moveEncoders(target - (gyro.getAngle() / 360), speed, false);
     }
