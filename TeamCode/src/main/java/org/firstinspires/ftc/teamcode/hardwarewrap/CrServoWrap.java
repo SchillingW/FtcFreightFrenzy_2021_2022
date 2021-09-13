@@ -22,7 +22,12 @@ public class CrServoWrap {
     // init, get servo from HardwareMap
     public CrServoWrap(Telemetry tele, HardwareMap map, String name, double speed) {
 
+        // telemetry device for debugging
         this.tele = tele;
+
+        // debugging data
+        tele.addData("init", "cr servo: " + name);
+        tele.update();
 
         servo = map.get(CRServo.class, name);
         this.name = name;

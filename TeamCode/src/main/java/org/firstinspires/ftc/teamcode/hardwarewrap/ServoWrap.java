@@ -23,8 +23,14 @@ public class ServoWrap {
     // init, get servo from HardwareMap
     public ServoWrap(Telemetry tele, HardwareMap map, String name, double minLimit, double maxLimit) {
 
+        // telemetry device for debugging
         this.tele = tele;
 
+        // debugging data
+        tele.addData("init", "servo: " + name);
+        tele.update();
+
+        // get motor reference
         servo = map.get(Servo.class, name);
         this.name = name;
         this.maxLimit = maxLimit;

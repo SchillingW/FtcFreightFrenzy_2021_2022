@@ -20,7 +20,7 @@ public class PreseasonTele extends OpMode {
     // init, get robot and controller
     @Override
     public void init() {
-        bot = new PreseasonBot(telemetry, hardwareMap);
+        bot = new PreseasonBot(null, telemetry, hardwareMap);
         pad = new GameController(new Gamepad[]{gamepad1, gamepad2});
     }
 

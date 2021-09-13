@@ -31,6 +31,10 @@ public class GyroWrap {
         // get telemetry device from opMode
         tele = op.telemetry;
 
+        // debugging data
+        tele.addData("init", "gyro sensor: " + name);
+        tele.update();
+
         // set parameters, measure in radians
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();
         params.mode = BNO055IMU.SensorMode.IMU;
@@ -53,6 +57,8 @@ public class GyroWrap {
     // get current gyro angle around active axis
     public double getAngle() {
         Orientation orient = sensor.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS);
+        tele.addData("angle", orient.firstAngle - startAngle);
+        tele.update();
         return orient.firstAngle - startAngle;
     }
 

@@ -28,13 +28,20 @@ public class DcMotorWrap {
     // init, get motor from HardwareMap
     public DcMotorWrap(Telemetry tele, HardwareMap map, String name, double wheelDiameter, double gearRatio, double speed, double tpr) {
 
+        // telemetry device for debugging
         this.tele = tele;
 
+        // debugging data
+        tele.addData("init", "dc motor: " + name);
+        tele.update();
+
+        // get motor reference
         motor = map.get(DcMotor.class, name);
         this.name = name;
         this.speed = speed / gearRatio;
         this.ticksPerInch = (tpr / gearRatio) / (wheelDiameter * Math.PI);
 
+        // reset motor mode
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
