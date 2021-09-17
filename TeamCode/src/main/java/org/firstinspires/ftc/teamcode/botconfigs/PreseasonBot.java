@@ -8,8 +8,12 @@ import org.firstinspires.ftc.teamcode.hardwaresystems.LinearDriveTrain;
 import org.firstinspires.ftc.teamcode.hardwarewrap.DcMotorWrap;
 import org.firstinspires.ftc.teamcode.hardwarewrap.GyroWrap;
 import org.firstinspires.ftc.teamcode.hardwarewrap.ServoWrap;
+import org.firstinspires.ftc.teamcode.oldstuff.Tele;
 
 public class PreseasonBot {
+
+    // telemetry device for debugging
+    public Telemetry tele;
 
     // drive train properties
     public LinearDriveTrain driveTrain;
@@ -30,22 +34,30 @@ public class PreseasonBot {
     // init, get hardware devices
     public PreseasonBot(LinearOpMode op, Telemetry tele, HardwareMap map) {
 
+        // telemetry device for debugging
+        this.tele = tele;
+
         // init drive train
         DcMotorWrap driveL = new DcMotorWrap(tele, map, driveNameL, 3.5, 1, 1, 288);
         DcMotorWrap driveR = new DcMotorWrap(tele, map, driveNameR, 3.5, 1, 1, 288);
         driveTrain = new LinearDriveTrain(tele, new DcMotorWrap[]{driveL, driveR}, driveLinearSpeed, driveTurnSpeed, 8);
 
         // init arm
-        DcMotorWrap hinge = new DcMotorWrap(tele, map, hingeName, 1, 1, 1, 288);
+        DcMotorWrap hinge = new DcMotorWrap(tele, map, hingeName, 1, 1, 0.5, 288);
         ServoWrap claw = new ServoWrap(tele, map, clawName, 0, 1);
         arm = new ClawedHinge(tele, hinge, claw);
 
         // init gyro
-        gyro = new GyroWrap(op, map, gyroName, 0, false);
+        gyro = new GyroWrap(op, tele, map, gyroName, 0, true);
     }
 
     // correct angle using gyro sensor to avoid drift
     public void normalizeGyro(double target, double speed) {
-        driveTrain.moveEncoders(target - (gyro.getAngle() / 360), speed, false);
+        double angle = GyroWrap.rad2rot(gyro.getAngle());
+        tele.addData("target", target);
+        tele.addData("speed", speed);
+        tele.addData("angle", angle);
+        tele.update();
+        driveTrain.moveEncoders(target - angle, speed, false);
     }
 }

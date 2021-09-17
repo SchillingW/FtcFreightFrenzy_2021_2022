@@ -27,10 +27,10 @@ public class GyroWrap {
     public boolean flip;
 
     // init, get gyro reference and set parameters
-    public GyroWrap(LinearOpMode op, HardwareMap map, String name, int axis, boolean flip) {
+    public GyroWrap(LinearOpMode op, Telemetry tele, HardwareMap map, String name, int axis, boolean flip) {
 
         // get telemetry device from opMode
-        tele = op.telemetry;
+        this.tele = tele;
 
         // debugging data
         tele.addData("init", "gyro sensor: " + name);
@@ -66,7 +66,7 @@ public class GyroWrap {
 
     // convert radian angle measurement to rotations
     public static double rad2rot(double rad) {
-        return rad * 180 / Math.PI;
+        return rad / 2 / Math.PI;
     }
 
     // get hypotenuse of vector

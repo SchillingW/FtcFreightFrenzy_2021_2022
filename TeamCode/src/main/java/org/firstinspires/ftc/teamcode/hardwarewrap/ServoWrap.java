@@ -40,7 +40,11 @@ public class ServoWrap {
     // run to target position
     public void run(double target) {
 
+        double thisTarget = (maxLimit - minLimit) * target + minLimit;
+
+        tele.addData("serve set", thisTarget);
+
         // use linear interpolation to normalize a 0-1 range target to between the servo limits
-        servo.setPosition((maxLimit - minLimit) * target + minLimit);
+        servo.setPosition(thisTarget);
     }
 }

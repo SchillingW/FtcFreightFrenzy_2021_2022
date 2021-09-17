@@ -15,7 +15,7 @@ public class PreseasonAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        // initialize robot and controllers
+        // initialize robot
         bot = new PreseasonBot(this, telemetry, hardwareMap);
 
         // wait for user to press play

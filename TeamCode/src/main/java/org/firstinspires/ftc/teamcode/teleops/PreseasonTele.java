@@ -42,6 +42,7 @@ public class PreseasonTele extends OpMode {
         telemetry.addData("right input", driveInputR);
         telemetry.addData("hinge input", armHinge);
         telemetry.addData("arm input", armClaw);
+        telemetry.addData("gyro sensor", bot.gyro.getAngle());
 
         // set drive train power with controller 1 y input
         bot.driveTrain.run(driveInputL, driveInputR);
@@ -51,10 +52,15 @@ public class PreseasonTele extends OpMode {
 
         // set claw position with controller 2 right stick y input
         if (armClaw > 0.5) {
+            telemetry.addData("run claw", "close");
             bot.arm.claw.run(1);
         }
         else if(armClaw < -0.5) {
+            telemetry.addData("run claw", "open");
             bot.arm.claw.run(0);
+        }
+        else {
+            telemetry.addData("run claw", "neutral");
         }
 
         // push telemetry debugging

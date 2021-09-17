@@ -35,6 +35,11 @@ public class LinearDriveTrain {
 
     // begin moving drive motors with encoders
     public void startMoveEncoders(double dist, double speed, boolean isStraight) {
+
+        // debug
+        //tele.addData("encoder move", " d: " + dist + " s: " + speed + " l: " + isStraight);
+        //tele.update();
+
         for (int i = 0; i < motors.length; i++) {
             motors[i].startMoveEncoders(dist * (isStraight ? (i == 0 ? -1 : 1) : -inchesPerRotation), speed * (isStraight ? linearSpeed : turnSpeed));
         }
